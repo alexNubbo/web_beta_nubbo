@@ -27,12 +27,35 @@
   @apply rounded-3xl shadow-float transition-all duration-300;
 }
 
-.glass-morphism {
-  @apply bg-white/80 backdrop-blur-md border border-white/20;
-}
-
-/* Scroll padding for anchors */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
+}
+
+/* GPU acceleration for animated elements */
+[class*="will-change"],
+.motion-div,
+[role="main"] > * {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Disable grayscale transition on hover for performance */
+.grayscale {
+  transition: grayscale(0) 0.3s ease;
 }
